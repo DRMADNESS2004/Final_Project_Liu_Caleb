@@ -1,3 +1,4 @@
 #Project excludes paths
 /.idea
 
+/target/
