@@ -16,8 +16,16 @@ public class Player extends Rectangle{
         this.posX=posX;
     }
 
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
+
+    public double getPosY(){
+        return posY;
+    }
+
     //mouse control for player on the left
-    private void movement(Canvas c){
+    public void movement(Canvas c){
         c.setOnMouseMoved(e->posY=e.getY());
     }
 
