@@ -4,13 +4,15 @@ import javafx.scene.paint.Color;
 
 public class Circle {
     private double radius;
-    private double posX=500;
-    private double posY=250;
+    private double posX;
+    private double posY;
     private double speedX;
     private double speedY;
     private Color color;
 
-    public Circle(double r, Color c, double sX, double sY){
+    public Circle(double pX, double pY, double r, Color c, double sX, double sY){
+        posX=pX;
+        posY=pY;
         radius=r;
         color=c;
         speedX=sX;
@@ -50,6 +52,13 @@ public class Circle {
         return speedY;
     }
 
+    public void setSpeedX(double speedX) {
+        this.speedX = speedX;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
+    }
 
     public void movement(){
         posX+=speedX;

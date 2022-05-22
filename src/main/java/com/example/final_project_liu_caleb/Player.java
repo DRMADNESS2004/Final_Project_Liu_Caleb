@@ -7,13 +7,17 @@ public class Player extends Rectangle{
     private double posX;
     private double posY;
 
-    //public Player(double pX, double pY, int w, int h, Color c){
-    //  super(pX,pY,w,h,c);
-    //}
-
     public Player(double posX, int w, int h, Color c){
         super(w,h,c);
         this.posX=posX;
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
     }
 
     public void setPosY(double posY) {
