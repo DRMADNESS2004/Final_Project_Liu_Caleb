@@ -22,6 +22,7 @@ public class Game {
     public boolean gameStarted=false;
     private int width;
     private int height;
+    private Color color;
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private Timeline timeline;
@@ -29,6 +30,7 @@ public class Game {
     public Game(int w, int h, Color c, Player p1, Player p2, Score s1, Score s2, Circle b){
         width=w;
         height=h;
+        color=c;
         player1=p1;
         player2=p2;
         score1=s1;
@@ -78,14 +80,15 @@ public class Game {
 
     //ball and bot movement
     public void run(GraphicsContext gc){
-        gc.setFill(Color.GOLDENROD);
-        gc.fillRect(0,0,800,500);
+        gc.setFill(color);
+        gc.fillRect(0,0,width,height);
 
-        gc.setFill(Color.PINK);
-        gc.setFont(Font.font(25));
+        gc.setFill(ball.getColor());
+        gc.setFont(Font.font(100));
 
         if(gameStarted){
             ball.movement();
+            player1.movement(canvas);
 
             //bot movements
             if(ball.getPosX()<width-width/4){
@@ -111,7 +114,7 @@ public class Game {
             gc.strokeText("Settings",width/2, height/2+50);
 
             //resets the ball's position and speed
-            ball.setPosY(width/2);
+            ball.setPosX(width/2);
             ball.setPosY(height/2);
             ball.setSpeedX(1);
             ball.setSpeedY(1);
@@ -122,8 +125,41 @@ public class Game {
         if(ball.getPosY()+ball.getRadius()>height || ball.getPosY()<0){
             ball.setSpeedY(ball.getSpeedY()*-1);
         }
-        else if(ball.getPosX()+ball.getRadius()>width||ball.getPosX()<0){
+        else if(ball.getPosX()+ball.getRadius()>width){
+            ball.setSpeedX(ball.getSpeedX()*-1);
+            score1.setScore(score1.getScore()+1);
+            gameStarted=false;
+        }
+        else if(ball.getPosX()<0){
+            ball.setSpeedX(ball.getSpeedX()*-1);
+            score2.setScore(score2.getScore()+1);
+            gameStarted=false;
+        }
+
+        //ball speed increase
+        if(((ball.getPosX()+ ball.getRadius()>player2.getPosX())&&ball.getPosY()>=player2.getPosY()&&ball.getPosY()<=player2.getPosY()+player2.getHeight())||
+        ((ball.getPosX()<=player1.getPosX()+player1.getWidth())&&ball.getPosY()>=player1.getPosY()&&ball.getPosY()<= player1.getPosY()+player1.getHeight())){
+            if(ball.getSpeedX()<0){
+                ball.setSpeedX(ball.getSpeedX()-1);
+            }
+            else{
+                ball.setSpeedX(ball.getSpeedX()+1);
+            }
+            if(ball.getSpeedY()<0){
+                ball.setSpeedY(ball.getSpeedY()-1);
+            }
+            else{
+                ball.setSpeedY(ball.getSpeedY()+1);
+            }
             ball.setSpeedX(ball.getSpeedX()*-1);
         }
+
+        gc.setFont(Font.font(50));
+        gc.fillText(score1.getLabel().getText(),width/4,100);
+        gc.fillText(score2.getLabel().getText(),3*width/4,100);
+
+        //draw player1 && player2
+        gc.fillRect(player1.getPosX(),player1.getPosY(),player1.getWidth(),player1.getHeight());
+        gc.fillRect(player2.getPosX(),player2.getPosY(),player2.getWidth(),player2.getHeight());
     }
 }
