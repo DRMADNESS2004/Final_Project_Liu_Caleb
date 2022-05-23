@@ -7,6 +7,10 @@ public class Player extends Rectangle{
     private double posX;
     private double posY;
 
+    public Player(){
+        super(25,100,Color.BLACK);
+    }
+
     public Player(double posX, int w, int h, Color c){
         super(w,h,c);
         this.posX=posX;

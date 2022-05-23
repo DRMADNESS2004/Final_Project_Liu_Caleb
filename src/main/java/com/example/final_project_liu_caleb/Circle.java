@@ -10,6 +10,15 @@ public class Circle {
     private double speedY;
     private Color color;
 
+    public Circle(){
+        posX=400;
+        posY=250;
+        radius=25;
+        color=Color.BLACK;
+        speedX=1;
+        speedY=1;
+    }
+
     public Circle(double pX, double pY, double r, Color c, double sX, double sY){
         posX=pX;
         posY=pY;
