@@ -2,12 +2,8 @@ package com.example.final_project_liu_caleb;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -91,7 +87,7 @@ public class Game {
             player1.movement(canvas);
 
             //bot movements
-            if(ball.getPosX()<width-width/4){
+            if(ball.getPosX()<width-width/6){
                 player2.setPosY(ball.getPosY()-player2.getHeight()/2);
             }
             else if(ball.getPosY()>player2.getPosY()+player2.getHeight()/2){
@@ -118,7 +114,6 @@ public class Game {
             ball.setPosY(height/2);
             ball.setSpeedX(1);
             ball.setSpeedY(1);
-
         }
 
         //makes ball stay in the canvas
@@ -143,13 +138,13 @@ public class Game {
                 ball.setSpeedX(ball.getSpeedX()-1);
             }
             else{
-                ball.setSpeedX(ball.getSpeedX()+1);
+                ball.setSpeedX(ball.getSpeedX()+0.5);
             }
             if(ball.getSpeedY()<0){
-                ball.setSpeedY(ball.getSpeedY()-1);
+                ball.setSpeedY(ball.getSpeedY()-0.5);
             }
             else{
-                ball.setSpeedY(ball.getSpeedY()+1);
+                ball.setSpeedY(ball.getSpeedY()+0.5);
             }
             ball.setSpeedX(ball.getSpeedX()*-1);
         }
