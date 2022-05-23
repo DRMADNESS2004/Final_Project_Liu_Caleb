@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -28,6 +27,11 @@ public class HelloApplication extends Application {
     private TextField tf13=new TextField();
     private int width=800;
     private int height=500;
+    private Game g1;
+    private boolean isMenu=true;
+    private Button start=new Button();
+    private Button settings=new Button();
+    private Button goBack=new Button();
 
     @Override
     public void start(Stage stage){
@@ -52,7 +56,7 @@ public class HelloApplication extends Application {
             p1=new Player(0,50,100, Color.BLUE);
         }
         if(tf11.getText().equals("")||tf12.getText().equals("")||tf13.getText().equals("")){
-            p2=new Player(750,50,100, Color.BLUE);
+            p2=new Player(775,25,100, Color.BLUE);
         }
         else{
             p2=new Player(width-Integer.parseInt(tf11.getText()),25,100, Color.BLUE);
@@ -67,8 +71,6 @@ public class HelloApplication extends Application {
         Score s1=new Score(50,50,Color.BLUE);
         Score s2=new Score(50,50,Color.BLUE);
 
-        Game g1;
-
         if(tf1.getText().equals("")||tf2.getText().equals("")||tf3.getText().equals("")){
             g1=new Game(800,500,Color.GREY,p1,p2,s1,s2,c1);
         }
@@ -76,26 +78,9 @@ public class HelloApplication extends Application {
             g1=new Game(width,height,color,p1,p2,s1,s2,c1);
         }
 
-        VBox vb1=new VBox(50);
-        vb1.setMinWidth(800);
-        vb1.setMinHeight(500);
-        vb1.setAlignment(Pos.CENTER);
-        Button start=new Button("Start");
-        start.setOnAction(e->{
-            g1.gameStarted=true;
-            stage.setScene(new Scene(new StackPane(g1.getCanvas())));
-        });
-        Button settings=new Button("Settings");
-        settings.setOnAction(e->{
-            stage.setScene(settings());
-        });
-        vb1.getChildren().addAll(start,settings);
-
+        menu(stage);
         g1.getCanvas().setOnMouseClicked(e->g1.gameStarted=true);
         stage.setTitle("Ping and Pong");
-        if(!g1.gameStarted){
-            stage.setScene(new Scene(vb1));
-        }
         stage.getScene().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.show();
         g1.getTimeline().play();
@@ -106,8 +91,27 @@ public class HelloApplication extends Application {
         launch(args);
     }
 
+    //menu scene
+    private void menu(Stage s){
+        VBox vb1=new VBox(50);
+        vb1.setMinWidth(800);
+        vb1.setMinHeight(500);
+        vb1.setAlignment(Pos.CENTER);
+        start=new Button("Start");
+        start.setOnAction(e->{
+            g1.gameStarted=true;
+            s.setScene(new Scene(new StackPane(g1.getCanvas())));
+        });
+        settings=new Button("Settings");
+        settings.setOnAction(e->{
+            settings(s);
+        });
+        vb1.getChildren().addAll(start,settings);
+        s.setScene(new Scene(vb1));
+    }
+
     //settings scene
-    private Scene settings(){
+    private void settings(Stage s){
         VBox vb1=new VBox(50);
         vb1.setMinWidth(width);
         vb1.setMinHeight(height);
@@ -155,9 +159,13 @@ public class HelloApplication extends Application {
         tf13.setPromptText("Color of Pong");
         vb5.getChildren().addAll(tf11,tf12,tf13);
 
-        vb1.getChildren().addAll(vb2,vb3,vb4,vb5);
+        goBack=new Button("Return");
+        goBack.setOnAction(e->{
+            menu(s);
+        });
 
-        Scene settings=new Scene(vb1);
-        return settings;
+        vb1.getChildren().addAll(vb2,vb3,vb4,vb5,goBack);
+
+        s.setScene(new Scene(vb1));
     }
 }
