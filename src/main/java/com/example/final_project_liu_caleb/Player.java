@@ -7,27 +7,28 @@ public class Player extends Rectangle{
     private double posX;
     private double posY;
 
+    //no-arg constructor
     public Player(){
         super(25,100,Color.BLACK);
     }
 
+    //arg constructor
     public Player(double posX, int w, int h, Color c){
         super(w,h,c);
         this.posX=posX;
     }
 
+    //returns the position of X
     public double getPosX() {
         return posX;
     }
 
-    public void setPosX(double posX) {
-        this.posX = posX;
-    }
-
+    //sets the position of Y
     public void setPosY(double posY) {
         this.posY = posY;
     }
 
+    //returns the position of X
     public double getPosY(){
         return posY;
     }
@@ -36,6 +37,5 @@ public class Player extends Rectangle{
     public void movement(Canvas c){
         c.setOnMouseMoved(e->posY=e.getY());
     }
-
 
 }
