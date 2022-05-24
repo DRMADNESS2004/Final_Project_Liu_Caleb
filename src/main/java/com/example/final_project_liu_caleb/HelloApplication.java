@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -12,74 +13,79 @@ import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
 
 public class HelloApplication extends Application {
-    private TextField tf1=new TextField();
-    private TextField tf2=new TextField();
-    private TextField tf3=new TextField();
-    private TextField tf4=new TextField();
-    private TextField tf5=new TextField();
-    private TextField tf6=new TextField();
-    private TextField tf7=new TextField();
-    private TextField tf8=new TextField();
-    private TextField tf9=new TextField();
-    private TextField tf10=new TextField();
-    private TextField tf11=new TextField();
-    private TextField tf12=new TextField();
-    private TextField tf13=new TextField();
-    private int width=800;
-    private int height=500;
+    private  int canWidth;
+    private  int canHeight;
+    private  Color canColor=Color.GREY;
+    private  double radius;
+    private  Color ballColor=Color.BLACK;
+    private  double speedX;
+    private  double speedY;
+    private  int p1Width;
+    private  int p1Height;
+    private  Color p1Color=Color.BLACK;
+    private  int p2Width;
+    private  int p2Height;
+    private  Color p2Color=Color.BLACK;
     private Game g1;
-    private boolean isMenu=true;
-    private Button start=new Button();
-    private Button settings=new Button();
-    private Button goBack=new Button();
+    private Player p1;
+    private Player p2;
+    private Circle c1;
+    private Score s1;
+    private Score s2;
 
     @Override
     public void start(Stage stage){
-        Player p1;
+        menu(stage);
+
+        /*Player p1;
         Player p2;
-        Circle c1;
-        Color color=Color.GRAY;
-        if(!tf1.getText().equals("")){
-            width=Integer.parseInt(tf1.getText());
+        Circle c1;*/
+
+        /*if(canWidth==0){
+            canWidth=800;
         }
-        if(!tf2.getText().equals("")){
-            height=Integer.parseInt(tf2.getText());
-        }
-        if(!tf3.getText().equals("")){
-            color= Color.valueOf(tf3.getText());
+        if(canHeight==0){
+            canHeight=500;
         }
 
-        if(tf8.getText().equals("")||tf9.getText().equals("")||tf10.getText().equals("")){
+        if(p1Width==0||p1Height==0){
             p1=new Player();
         }
         else{
-            p1=new Player(0,50,100, Color.BLUE);
+            p1=new Player(0,p1Width,p1Height,p1Color);
         }
-        if(tf11.getText().equals("")||tf12.getText().equals("")||tf13.getText().equals("")){
-            p2=new Player(775,25,100, Color.BLUE);
+        if(p2Width==0||p2Height==0){
+            p2=new Player(775,25,100, Color.BLACK);
         }
         else{
-            p2=new Player(width-Integer.parseInt(tf11.getText()),25,100, Color.BLUE);
+            p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
         }
-        if(tf4.getText().equals("")||tf5.getText().equals("")||tf6.getText().equals("")||tf7.getText().equals("")){
+        if(radius==0||speedX==0||speedY==0){
             c1=new Circle();
         }
         else{
-            c1=new Circle(400,250,50,Color.PINK, 1,1);
+            c1=new Circle(400,250,radius,ballColor,speedX,speedY);
         }
 
         Score s1=new Score(50,50,Color.BLUE);
         Score s2=new Score(50,50,Color.BLUE);
 
-        if(tf1.getText().equals("")||tf2.getText().equals("")||tf3.getText().equals("")){
-            g1=new Game(800,500,Color.GREY,p1,p2,s1,s2,c1);
+        if(canWidth==800||canWidth==500){
+            g1=new Game(800,500,canColor,p1,p2,s1,s2,c1);
         }
         else{
-            g1=new Game(width,height,color,p1,p2,s1,s2,c1);
+            g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1);
+        }*/
+
+        g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1);
+
+        if(g1.getScore1().getScore()==5||g1.getScore2().getScore()==5){
+            g1.getCanvas().setOnMouseClicked(e->menu(stage));
+        }
+        else{
+            g1.getCanvas().setOnMouseClicked(e->g1.gameStarted=true);
         }
 
-        menu(stage);
-        g1.getCanvas().setOnMouseClicked(e->g1.gameStarted=true);
         stage.setTitle("Ping and Pong");
         stage.getScene().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.show();
@@ -92,80 +98,187 @@ public class HelloApplication extends Application {
     }
 
     //menu scene
-    private void menu(Stage s){
+    public void menu(Stage s){
+
+        if(canWidth<=100){
+            canWidth=800;
+        }
+        if(canHeight<=100){
+            canHeight=500;
+        }
+
+        if(p1Width==0||p1Height==0){
+            p1=new Player();
+        }
+        else{
+            p1=new Player(0,p1Width,p1Height,p1Color);
+        }
+        if(p2Width==0||p2Height==0){
+            p2=new Player(775,25,100, Color.BLACK);
+        }
+        else{
+            p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
+        }
+        if(radius==0){
+            c1=new Circle();
+        }
+        else{
+            c1=new Circle(400,250,radius,ballColor,speedX,speedY);
+        }
+
+        s1=new Score(50,50,Color.BLUE);
+        s2=new Score(50,50,Color.BLUE);
+
         VBox vb1=new VBox(50);
         vb1.setMinWidth(800);
         vb1.setMinHeight(500);
         vb1.setAlignment(Pos.CENTER);
-        start=new Button("Start");
+
+        Label title=new Label("Ping and Pong");
+        title.setStyle("-fx-font-size: 50pt ; -fx-text-fill: #ffffff");
+
+        Button start=new Button("Start");
+        start.setStyle("-fx-font-size: 30pt; -fx-background-color: #f7dab0; -fx-border-color: #f27216;-fx-text-fill: #f5b75b;");
         start.setOnAction(e->{
             g1.gameStarted=true;
             s.setScene(new Scene(new StackPane(g1.getCanvas())));
+
         });
-        settings=new Button("Settings");
+        Button settings=new Button("Settings");
+        settings.setStyle("-fx-font-size: 30pt; -fx-background-color: #f7dab0; -fx-border-color: #f27216;-fx-text-fill: #f5b75b;");
         settings.setOnAction(e->{
             settings(s);
         });
-        vb1.getChildren().addAll(start,settings);
+        vb1.getChildren().addAll(title,start,settings);
+        vb1.setStyle("-fx-background-color: #f5b75b;");
         s.setScene(new Scene(vb1));
     }
 
     //settings scene
     private void settings(Stage s){
-        VBox vb1=new VBox(50);
-        vb1.setMinWidth(width);
-        vb1.setMinHeight(height);
+        VBox vb1=new VBox(15);
+        vb1.setMinWidth(canWidth);
+        vb1.setMinHeight(canHeight);
         vb1.setAlignment(Pos.CENTER);
 
-        VBox vb2=new VBox();
-        vb2.setMaxWidth(width/2);
-        tf1=new TextField();
+        Label settingsTitle=new Label("Settings");
+        settingsTitle.setStyle("-fx-font-size: 20pt ; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
+
+        VBox vb2=new VBox(5);
+        vb2.setMaxWidth(canWidth/2);
+        TextField tf1=new TextField();
         tf1.setPromptText("Width of canvas");
-        tf2=new TextField();
+        tf1.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf2=new TextField();
         tf2.setPromptText("Height of canvas");
-        tf3=new TextField();
-        tf3.setPromptText("Color of canvas");
+        tf2.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf3=new TextField();
+        tf3.setPromptText("Color of canvas       #Hex (000000 - ffffff)");
+        tf3.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb2.getChildren().addAll(tf1,tf2,tf3);
 
-        VBox vb3=new VBox();
-        vb3.setMaxWidth(width/2);
-        tf4=new TextField();
+        VBox vb3=new VBox(5);
+        vb3.setMaxWidth(canWidth/2);
+        TextField tf4=new TextField();
         tf4.setPromptText("Radius of ball");
-        tf5=new TextField();
-        tf5.setPromptText("Color of ball");
-        tf6=new TextField();
+        tf4.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf5=new TextField();
+        tf5.setPromptText("Color of ball            #Hex (000000 - ffffff)");
+        tf5.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf6=new TextField();
         tf6.setPromptText("Speed x of ball");
-        tf7=new TextField();
+        tf6.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf7=new TextField();
         tf7.setPromptText("Speed y of ball");
+        tf7.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb3.getChildren().addAll(tf4,tf5,tf6,tf7);
 
-        VBox vb4=new VBox();
-        vb4.setMaxWidth(width/2);
-        tf8=new TextField();
+        VBox vb4=new VBox(5);
+        vb4.setMaxWidth(canWidth/2);
+        TextField tf8=new TextField();
         tf8.setPromptText("Width of Ping");
-        tf9=new TextField();
+        tf8.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf9=new TextField();
         tf9.setPromptText("Height of Ping");
-        tf10=new TextField();
-        tf10.setPromptText("Color of Ping");
+        tf9.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf10=new TextField();
+        tf10.setPromptText("Color of Ping            #Hex (000000 - ffffff)");
+        tf10.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb4.getChildren().addAll(tf8,tf9,tf10);
 
-        VBox vb5=new VBox();
-        vb5.setMaxWidth(width/2);
-        tf11=new TextField();
+        VBox vb5=new VBox(5);
+        vb5.setMaxWidth(canWidth/2);
+        TextField tf11=new TextField();
         tf11.setPromptText("Width of Pong");
-        tf12=new TextField();
+        tf11.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf12=new TextField();
         tf12.setPromptText("Height of Pong");
-        tf13=new TextField();
-        tf13.setPromptText("Color of Pong");
+        tf12.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
+        TextField tf13=new TextField();
+        tf13.setPromptText("Color of Pong            #Hex (000000 - ffffff)");
+        tf13.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb5.getChildren().addAll(tf11,tf12,tf13);
 
-        goBack=new Button("Return");
+        Button goBack=new Button("Return");
         goBack.setOnAction(e->{
+            //check if the values entered were not correct or empty
+            try{
+                canWidth=Integer.parseInt(tf1.getText());
+                canHeight=Integer.parseInt(tf2.getText());
+                canColor= Color.valueOf(tf3.getText());
+            }
+            catch(Exception a){
+                a.printStackTrace();
+                canWidth=0;
+                canHeight=0;
+                canColor=Color.GREY;
+            }
+
+            try{
+                radius= Double.parseDouble(tf4.getText());
+                ballColor=Color.valueOf(tf5.getText());
+                speedX=Double.parseDouble(tf6.getText());
+                speedY=Double.parseDouble(tf7.getText());
+            }
+            catch(Exception a){
+                a.printStackTrace();
+                radius=0;
+                ballColor=Color.BLACK;
+                speedX=1;
+                speedY=1;
+            }
+
+            try{
+                p1Width=Integer.parseInt(tf8.getText());
+                p1Height=Integer.parseInt(tf9.getText());
+                p1Color=Color.valueOf(tf10.getText());
+            }
+            catch(Exception a){
+                a.printStackTrace();
+                p1Width=0;
+                p1Height=0;
+                p1Color=Color.BLACK;
+            }
+
+            try{
+                p2Width=Integer.parseInt(tf11.getText());
+                p2Height=Integer.parseInt(tf12.getText());
+                p2Color=Color.valueOf(tf13.getText());
+            }
+            catch(Exception a){
+                a.printStackTrace();
+                p2Width=0;
+                p2Height=0;
+                p2Color=Color.BLACK;
+            }
+
             menu(s);
+
         });
+        goBack.setStyle("-fx-font-size: 10pt; -fx-background-color: #84e8d0; -fx-border-color: #d3f2ee;-fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5; -fx-border-radius: 5;");
 
-        vb1.getChildren().addAll(vb2,vb3,vb4,vb5,goBack);
-
+        vb1.getChildren().addAll(settingsTitle,vb2,vb3,vb4,vb5,goBack);
+        vb1.setStyle("-fx-background-color: #08bd92");
         s.setScene(new Scene(vb1));
     }
 }
