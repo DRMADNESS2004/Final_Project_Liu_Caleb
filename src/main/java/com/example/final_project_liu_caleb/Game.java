@@ -61,9 +61,11 @@ public class Game {
         gc.setFill(color);
         gc.fillRect(0,0,width,height);
 
+        //sets the color of the ball
         gc.setFill(ball.getColor());
         gc.setFont(Font.font(100));
 
+        //if canvas is clicked
         if(score1.getScore()!=5&&score2.getScore()!=5){
             canvas.setOnMouseClicked(e->gameStarted=true);
         }
