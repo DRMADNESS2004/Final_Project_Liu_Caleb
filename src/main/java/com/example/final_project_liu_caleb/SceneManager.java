@@ -148,7 +148,7 @@ public class SceneManager {
                 //a.printStackTrace();
                 canWidth=0;
                 canHeight=0;
-                canColor=Color.GREY;
+                canColor=Color.rgb(23, 138, 252);
             }
 
             try{
