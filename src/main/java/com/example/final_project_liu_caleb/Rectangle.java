@@ -2,6 +2,7 @@ package com.example.final_project_liu_caleb;
 
 import javafx.scene.paint.Color;
 
+//abstract class (cannot be instantiated), player inherits from this class
 public abstract class Rectangle {
     private double width;
     private double height;

@@ -2,6 +2,7 @@ package com.example.final_project_liu_caleb;
 
 import javafx.scene.paint.Color;
 
+//class to create the ball, it handles its speed and direction too
 public class Circle {
     private double radius;
     private double posX;

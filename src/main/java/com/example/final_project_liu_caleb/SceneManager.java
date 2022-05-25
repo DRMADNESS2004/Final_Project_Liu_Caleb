@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+//class that handles the changes in scenes
 public class SceneManager {
     private  int canWidth;
     private  int canHeight;
@@ -33,7 +34,7 @@ public class SceneManager {
     private Stage stage;
 
     //arg constructor
-    public SceneManager(Stage s){
+    public SceneManager(Stage s) throws ExceptionInInitializerError{
         stage=s;
     }
 

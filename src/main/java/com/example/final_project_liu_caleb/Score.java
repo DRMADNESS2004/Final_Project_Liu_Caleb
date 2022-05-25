@@ -1,8 +1,8 @@
 package com.example.final_project_liu_caleb;
 
-import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
+//class that keeps track of the score, also implements ICountable, it can add pts
 public class Score implements ICountable{
     private int score;
     private Color color;
@@ -35,14 +35,6 @@ public class Score implements ICountable{
     //adds point to the player's score
     public void addPts(){
         score++;
-    }
-
-    @Override
-    //resets the pts of both scores
-    public void resetPts(Score s) {
-        score=0;
-        s.setScore(0);
-
     }
 
     @Override
