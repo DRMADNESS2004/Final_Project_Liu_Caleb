@@ -1,43 +1,56 @@
 package com.example.final_project_liu_caleb;
 
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
-public class Score extends Rectangle implements ICountable{
-    private HBox hbox=new HBox();
-    private Label label=new Label("0");
+public class Score implements ICountable{
     private int score;
+    private Color color;
 
-    public Score(int w, int h, Color c){
-        super(w,h,c);
-        hbox.setMinWidth(w);
-        hbox.setMinHeight(h);
-        label.setStyle("-fx-background-color:"+c);
+    //no-arg constructor
+    public Score(){
+        color=Color.BLACK;
     }
 
+    //arg constructor
+    public Score(Color c){
+        color=c;
+    }
+
+    //returns the color
+    public Color getColor() {
+        return color;
+    }
+
+    //returns the score
     public int getScore() {
         return score;
     }
 
+    //sets the score
     public void setScore(int score) {
         this.score = score;
-        label.setText(""+score);
     }
 
-    public Label getLabel() {
-        return label;
+    //adds point to the player's score
+    public void addPts(){
+        score++;
     }
 
     @Override
-    public String compareTo(Score s) {
-        int score1=Integer.parseInt(label.getText());
-        int score2=Integer.parseInt(s.getLabel().getText());
+    //resets the pts of both scores
+    public void resetPts(Score s) {
+        score=0;
+        s.setScore(0);
 
-        if(score1>score2){
+    }
+
+    @Override
+    //compares the scores between the two players
+    public String compareTo(Score s) {
+        int score2=s.getScore();
+
+        if(score>score2){
             return "Ping won!";
         }
         else{
