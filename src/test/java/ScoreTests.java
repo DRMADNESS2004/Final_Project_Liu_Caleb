@@ -6,11 +6,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScoreTests {
     @Test
-    public void settersGettersArgConstructor(){
-        Score s1=new Score(50,50, Color.AQUA);
+    public void GettersArgConstructor(){
+        Score s1=new Score(Color.AQUA);
 
-        assertEquals(50,s1.getWidth());
-        assertEquals(50,s1.getHeight());
         assertEquals(Color.AQUA,s1.getColor());
+    }
+
+    @Test
+    public void setters(){
+        Score s1=new Score(Color.AQUA);
+
+        s1.setScore(0);
+
+        assertEquals(0,s1.getScore());
+    }
+
+    @Test
+    public void compareTest(){
+        Score ping=new Score(Color.AQUA);
+        Score pong=new Score(Color.AQUA);
+
+        ping.setScore(5);
+        pong.setScore(9);
+
+        System.out.println(ping.compareTo(pong));
     }
 }
