@@ -23,6 +23,7 @@ public class Game {
     private GraphicsContext graphicsContext;
     private Timeline timeline;
 
+    //arg constructor
     public Game(int w, int h, Color c, Player p1, Player p2, Score s1, Score s2, Circle b){
         width=w;
         height=h;
@@ -55,21 +56,6 @@ public class Game {
         return canvas;
     }
 
-    //returns the graphics context
-    public GraphicsContext getGraphicsContext() {
-        return graphicsContext;
-    }
-
-    //returns first score object (player 1: Ping)
-    public Score getScore1() {
-        return score1;
-    }
-
-    //returns second score object (player 2: Pong)
-    public Score getScore2() {
-        return score2;
-    }
-
     //ball and bot movement
     public void run(GraphicsContext gc){
         gc.setFill(color);
@@ -78,6 +64,9 @@ public class Game {
         gc.setFill(ball.getColor());
         gc.setFont(Font.font(100));
 
+        if(score1.getScore()!=5&&score2.getScore()!=5){
+            canvas.setOnMouseClicked(e->gameStarted=true);
+        }
         if(gameStarted){
             ball.movement();
             player1.movement(canvas);
@@ -95,8 +84,6 @@ public class Game {
 
             //draw ball
             gc.fillOval(ball.getPosX(), ball.getPosY(), ball.getRadius(), ball.getRadius());
-            score2.setScore(4);
-            //score1.setScore(0);
         }
         else{
             if(!(score1.getScore()>=5||score2.getScore()>=5)){
@@ -108,17 +95,18 @@ public class Game {
                 //resets the ball's position and speed
                 ball.setPosX(width/2);
                 ball.setPosY(height/2);
-                ball.setSpeedX(1);
-                ball.setSpeedY(1);
+                ball.randomSpeed();
             }
             else{
+                //if either one of the score is equal to 5, resets scores
                 gc.setStroke(Color.WHITE);
                 gc.setTextAlign(TextAlignment.CENTER);
+                //outputs winner
                 gc.strokeText(score1.compareTo(score2),width/2, height/2);
                 gc.strokeText("Back to menu",width/2, height/2+100);
                 ball.setPosX(width/2);
                 ball.setPosY(height/2);
-                gameStarted=false;
+                canvas.setOnMouseClicked(e->score1.resetPts(score2));
             }
         }
 
@@ -128,12 +116,12 @@ public class Game {
         }
         else if(ball.getPosX()+ball.getRadius()>width){
             ball.setSpeedX(ball.getSpeedX()*-1);
-            score1.setScore(score1.getScore()+1);
+            score1.addPts();
             gameStarted=false;
         }
         else if(ball.getPosX()<0){
             ball.setSpeedX(ball.getSpeedX()*-1);
-            score2.setScore(score2.getScore()+1);
+            score2.addPts();
             gameStarted=false;
         }
 
@@ -143,10 +131,11 @@ public class Game {
             ball.speedIncrease();
         }
 
+        //draws the scores
         gc.setFont(Font.font(50));
         gc.setFill(score1.getColor());
-        gc.fillText(score1.getLabel().getText(),width/4,100);
-        gc.fillText(score2.getLabel().getText(),3*width/4,100);
+        gc.fillText(String.valueOf(score1.getScore()),width/4,100);
+        gc.fillText(String.valueOf(score2.getScore()),3*width/4,100);
 
         //draw player1 && player2
         gc.setFill(player1.getColor());
