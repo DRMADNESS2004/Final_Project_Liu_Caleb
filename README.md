@@ -32,3 +32,5 @@ scores and the other compares them to return a winner. The Score class keeps cou
 also contains a method to increment the score. It implements ICountable. 
 
 
+UML Diagram
+![](UML_Diagram_Pong.png)
