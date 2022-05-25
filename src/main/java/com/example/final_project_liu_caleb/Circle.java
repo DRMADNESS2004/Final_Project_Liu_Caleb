@@ -85,6 +85,14 @@ public class Circle {
         this.speedY = speedY;
     }
 
+    public double getInitialSpeedX() {
+        return initialSpeedX;
+    }
+
+    public double getInitialSpeedY() {
+        return initialSpeedY;
+    }
+
     //modifies the position X and Y according to the speed when called
     public void movement(){
         posX+=speedX;

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CircleTests {
     @Test
+    //tests the getters when creating a Circle object using the argument constructor
     public void GettersArgConstructor(){
         Circle c1=new Circle(250,500,54, Color.ALICEBLUE,3,1.2);
 
@@ -18,6 +19,7 @@ public class CircleTests {
     }
 
     @Test
+    //tests the getters when creating a Circle object using the no-arg constructor
     public void GettersNoArgConstructor(){
         Circle c1=new Circle();
 
@@ -30,6 +32,7 @@ public class CircleTests {
     }
 
     @Test
+    //tests the setters
     public void setters(){
         Circle c1=new Circle();
 
@@ -45,6 +48,7 @@ public class CircleTests {
     }
 
     @Test
+    //tests the modifications of the attributes posX and posY when the method movement() is called
     public void positionModifications(){
         Circle c1=new Circle();
         c1.movement();
@@ -54,6 +58,7 @@ public class CircleTests {
     }
 
     @Test
+    //tests the modifications of the attributes speedX and speedY when the method speedIncrease() is called
     public void speedModifications(){
         Circle c1=new Circle();
 
@@ -66,12 +71,28 @@ public class CircleTests {
     }
 
     @Test
+    //tests the modifications of the attributes posX and posY when the method movement() is called
     public void randomSpeedTest(){
         Circle c1=new Circle();
         c1.randomSpeed();
         double speedX=c1.getSpeedX();
         double speedY=c1.getSpeedY();
 
-        if(speedX==1&&speedY==1){}
+        if(speedX==1&&speedY==1){
+            assertEquals(1,c1.getInitialSpeedX());
+            assertEquals(1,c1.getInitialSpeedY());
+        }
+        else if(speedX==-1&&speedY==-1){
+            assertEquals(-1,c1.getInitialSpeedX()*-1);
+            assertEquals(-1,c1.getInitialSpeedY()*-1);
+        }
+        else if(speedX==-1&&speedY==1){
+            assertEquals(-1,c1.getInitialSpeedX()*-1);
+            assertEquals(1,c1.getInitialSpeedY());
+        }
+        else{
+            assertEquals(1,c1.getInitialSpeedX());
+            assertEquals(-1,c1.getInitialSpeedY()*-1);
+        }
     }
 }
