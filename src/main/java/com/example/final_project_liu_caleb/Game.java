@@ -22,9 +22,10 @@ public class Game {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private Timeline timeline;
+    private SceneManager sceneManager;
 
     //arg constructor
-    public Game(int w, int h, Color c, Player p1, Player p2, Score s1, Score s2, Circle b){
+    public Game(int w, int h, Color c, Player p1, Player p2, Score s1, Score s2, Circle b,SceneManager sm){
         width=w;
         height=h;
         color=c;
@@ -33,6 +34,7 @@ public class Game {
         score1=s1;
         score2=s2;
         ball=b;
+        sceneManager=sm;
         animation();
     }
 
@@ -86,6 +88,7 @@ public class Game {
 
             //draw ball
             gc.fillOval(ball.getPosX(), ball.getPosY(), ball.getRadius(), ball.getRadius());
+            score2.setScore(4);
         }
         else{
             if(!(score1.getScore()>=5||score2.getScore()>=5)){
@@ -108,7 +111,7 @@ public class Game {
                 gc.strokeText("Back to menu",width/2, height/2+100);
                 ball.setPosX(width/2);
                 ball.setPosY(height/2);
-                canvas.setOnMouseClicked(e->score1.resetPts(score2));
+                canvas.setOnMouseClicked(e->sceneManager.menu());
             }
         }
 
