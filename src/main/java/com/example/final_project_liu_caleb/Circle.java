@@ -9,6 +9,8 @@ public class Circle {
     private double speedX;
     private double speedY;
     private Color color;
+    private double initialSpeedX;
+    private double initialSpeedY;
 
     //no-arg constructor
     public Circle(){
@@ -18,6 +20,8 @@ public class Circle {
         color=Color.BLACK;
         speedX=1;
         speedY=1;
+        initialSpeedX=1;
+        initialSpeedY=1;
     }
 
     //arg constructor
@@ -28,6 +32,8 @@ public class Circle {
         color=c;
         speedX=sX;
         speedY=sY;
+        initialSpeedX=sX;
+        initialSpeedY=sY;
     }
 
     //returns the position of X
@@ -84,6 +90,27 @@ public class Circle {
     public void movement(){
         posX+=speedX;
         posY+=speedY;
+    }
+
+    //randomizes the direction of the ball (used after one player scores)
+    public void randomSpeed(){
+        double rand=Math.random();
+        if(rand<=0.25){
+            speedX=initialSpeedX;
+            speedY=initialSpeedY;
+        }
+        else if(rand<=0.5){
+            speedX=initialSpeedX*-1;
+            speedY=initialSpeedY*-1;
+        }
+        else if(rand<=0.75){
+            speedX=initialSpeedX*-1;
+            speedY=initialSpeedY;
+        }
+        else{
+            speedX=initialSpeedX;
+            speedY=initialSpeedY*-1;
+        }
     }
 
     //increases the speed accordingly to its direction when called
