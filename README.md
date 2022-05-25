@@ -13,8 +13,13 @@ after a point or to reset the points of the two players.
 One of the challenges I faced along the way was that I didn't really know how the animation classes worked since
 we never learned it in class. I got stuck a lot early on since I hadn't included certain methods of these
 classes to make the animations work and to make the game appear. Another one of the challenges was that
-I was struggling to link scenes together since we also had never learned that before. I knew it was possible,
-but that also took a lot of time to figure out as I was trying various methods to find the solution.
+I was struggling to link scenes together since we also had never practiced that before. I knew it was possible,
+but that also took a lot of time to figure out as I was trying various methods to find the solution. In the end,
+my teacher, Mr. Tawfiq, proposed to create a different class, SceneManager to handle the change of scenes. A few
+features that I wish to include in the future are a difficulty setting for the bot(easy, medium, impossible). I'd
+also like to include certain sound effects whenever the player wins, clicks a button or when the ball hits something. 
+There could also be a mode where the second player(Pong) is actually controlled by another player using the up and
+down arrow keys.
 
 My Game class has 2 players, 2 scores, 1 circle(ball), a canvas, a graphics context, a timeline, etc. It
 handles all the methods and behaviours of the elements in my game by putting them together. The run method
