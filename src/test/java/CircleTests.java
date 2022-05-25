@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//Circle class tests
 public class CircleTests {
     @Test
     //tests the getters when creating a Circle object using the argument constructor
