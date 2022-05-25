@@ -4,24 +4,24 @@ import javafx.scene.paint.Color;
 
 //abstract class (cannot be instantiated), player inherits from this class
 public abstract class Rectangle {
-    private double width;
-    private double height;
+    private int width;
+    private int height;
     private Color color;
 
     //arg constructor
-    public Rectangle(double w, double h, Color c){
+    public Rectangle(int w, int h, Color c){
         width=w;
         height=h;
         color=c;
     }
 
     //returns the width
-    public double getWidth() {
+    public int getWidth() {
         return width;
     }
 
     //returns the height
-    public double getHeight() {
+    public int getHeight() {
         return height;
     }
 

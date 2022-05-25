@@ -16,15 +16,15 @@ public class SceneManager {
     private  int canHeight;
     private  Color canColor=Color.GREY;
     private  double radius;
-    private  Color ballColor=Color.BLACK;
+    private  Color ballColor;
     private  double speedX;
     private  double speedY;
     private  int p1Width;
     private  int p1Height;
-    private  Color p1Color=Color.BLACK;
+    private  Color p1Color;
     private  int p2Width;
     private  int p2Height;
-    private  Color p2Color=Color.BLACK;
+    private  Color p2Color;
     private Player p1;
     private Player p2;
     private Circle c1;
