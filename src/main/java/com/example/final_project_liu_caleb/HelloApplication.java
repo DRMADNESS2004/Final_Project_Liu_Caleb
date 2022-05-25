@@ -26,70 +26,20 @@ public class HelloApplication extends Application {
     private  int p2Width;
     private  int p2Height;
     private  Color p2Color=Color.BLACK;
-    private Game g1;
     private Player p1;
     private Player p2;
     private Circle c1;
     private Score s1;
     private Score s2;
+    private Game g1;
 
     @Override
     public void start(Stage stage){
         menu(stage);
 
-        /*Player p1;
-        Player p2;
-        Circle c1;*/
-
-        /*if(canWidth==0){
-            canWidth=800;
-        }
-        if(canHeight==0){
-            canHeight=500;
-        }
-
-        if(p1Width==0||p1Height==0){
-            p1=new Player();
-        }
-        else{
-            p1=new Player(0,p1Width,p1Height,p1Color);
-        }
-        if(p2Width==0||p2Height==0){
-            p2=new Player(775,25,100, Color.BLACK);
-        }
-        else{
-            p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
-        }
-        if(radius==0||speedX==0||speedY==0){
-            c1=new Circle();
-        }
-        else{
-            c1=new Circle(400,250,radius,ballColor,speedX,speedY);
-        }
-
-        Score s1=new Score(50,50,Color.BLUE);
-        Score s2=new Score(50,50,Color.BLUE);
-
-        if(canWidth==800||canWidth==500){
-            g1=new Game(800,500,canColor,p1,p2,s1,s2,c1);
-        }
-        else{
-            g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1);
-        }*/
-
-        g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1);
-
-        if(g1.getScore1().getScore()==5||g1.getScore2().getScore()==5){
-            g1.getCanvas().setOnMouseClicked(e->menu(stage));
-        }
-        else{
-            g1.getCanvas().setOnMouseClicked(e->g1.gameStarted=true);
-        }
-
         stage.setTitle("Ping and Pong");
         stage.getScene().getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.show();
-        g1.getTimeline().play();
     }
 
 
@@ -99,35 +49,7 @@ public class HelloApplication extends Application {
 
     //menu scene
     public void menu(Stage s){
-
-        if(canWidth<=100){
-            canWidth=800;
-        }
-        if(canHeight<=100){
-            canHeight=500;
-        }
-
-        if(p1Width==0||p1Height==0){
-            p1=new Player();
-        }
-        else{
-            p1=new Player(0,p1Width,p1Height,p1Color);
-        }
-        if(p2Width==0||p2Height==0){
-            p2=new Player(775,25,100, Color.BLACK);
-        }
-        else{
-            p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
-        }
-        if(radius==0){
-            c1=new Circle();
-        }
-        else{
-            c1=new Circle(400,250,radius,ballColor,speedX,speedY);
-        }
-
-        s1=new Score(50,50,Color.BLUE);
-        s2=new Score(50,50,Color.BLUE);
+        gameAppearance();
 
         VBox vb1=new VBox(50);
         vb1.setMinWidth(800);
@@ -142,7 +64,7 @@ public class HelloApplication extends Application {
         start.setOnAction(e->{
             g1.gameStarted=true;
             s.setScene(new Scene(new StackPane(g1.getCanvas())));
-
+            g1.getTimeline().play();
         });
         Button settings=new Button("Settings");
         settings.setStyle("-fx-font-size: 30pt; -fx-background-color: #f7dab0; -fx-border-color: #f27216;-fx-text-fill: #f5b75b;");
@@ -225,10 +147,10 @@ public class HelloApplication extends Application {
             try{
                 canWidth=Integer.parseInt(tf1.getText());
                 canHeight=Integer.parseInt(tf2.getText());
-                canColor= Color.valueOf(tf3.getText());
+                canColor=Color.valueOf(tf3.getText());
             }
             catch(Exception a){
-                a.printStackTrace();
+                //a.printStackTrace();
                 canWidth=0;
                 canHeight=0;
                 canColor=Color.GREY;
@@ -241,7 +163,7 @@ public class HelloApplication extends Application {
                 speedY=Double.parseDouble(tf7.getText());
             }
             catch(Exception a){
-                a.printStackTrace();
+                //a.printStackTrace();
                 radius=0;
                 ballColor=Color.BLACK;
                 speedX=1;
@@ -254,7 +176,7 @@ public class HelloApplication extends Application {
                 p1Color=Color.valueOf(tf10.getText());
             }
             catch(Exception a){
-                a.printStackTrace();
+                //a.printStackTrace();
                 p1Width=0;
                 p1Height=0;
                 p1Color=Color.BLACK;
@@ -266,7 +188,7 @@ public class HelloApplication extends Application {
                 p2Color=Color.valueOf(tf13.getText());
             }
             catch(Exception a){
-                a.printStackTrace();
+                //a.printStackTrace();
                 p2Width=0;
                 p2Height=0;
                 p2Color=Color.BLACK;
@@ -280,5 +202,38 @@ public class HelloApplication extends Application {
         vb1.getChildren().addAll(settingsTitle,vb2,vb3,vb4,vb5,goBack);
         vb1.setStyle("-fx-background-color: #08bd92");
         s.setScene(new Scene(vb1));
+    }
+
+    //sets the attributes of the elements in Ping and Pong (the game title)
+    public void gameAppearance(){
+        if(canWidth<=100){
+            canWidth=800;
+        }
+        if(canHeight<=100){
+            canHeight=500;
+        }
+
+        if(p1Width==0||p1Height==0){
+            p1=new Player();
+        }
+        else{
+            p1=new Player(0,p1Width,p1Height,p1Color);
+        }
+        if(p2Width==0||p2Height==0){
+            p2=new Player(775,25,100, Color.BLACK);
+        }
+        else{
+            p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
+        }
+        if(radius==0){
+            c1=new Circle();
+        }
+        else{
+            c1=new Circle(400,250,radius,ballColor,speedX,speedY);
+        }
+
+        s1=new Score(Color.rgb(247, 205, 218));
+        s2=new Score(Color.rgb(247, 205, 218));
+        g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1);
     }
 }
