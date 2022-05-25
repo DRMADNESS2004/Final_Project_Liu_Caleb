@@ -60,12 +60,12 @@ public class Game {
 
     //ball and bot movement
     public void run(GraphicsContext gc){
+        //sets the background color
         gc.setFill(color);
         gc.fillRect(0,0,width,height);
 
         //sets the color of the ball
         gc.setFill(ball.getColor());
-        gc.setFont(Font.font(100));
 
         //if canvas is clicked
         if(score1.getScore()!=5&&score2.getScore()!=5){
@@ -88,7 +88,6 @@ public class Game {
 
             //draw ball
             gc.fillOval(ball.getPosX(), ball.getPosY(), ball.getRadius(), ball.getRadius());
-            score2.setScore(4);
         }
         else{
             if(!(score1.getScore()>=5||score2.getScore()>=5)){
@@ -115,7 +114,7 @@ public class Game {
             }
         }
 
-        //makes ball stay in the canvas
+        //makes ball stay in the canvas and adds pts to Ping if it touches the right wall and to Pong if it touches the left wall
         if(ball.getPosY()+ball.getRadius()>height || ball.getPosY()<0){
             ball.setSpeedY(ball.getSpeedY()*-1);
         }

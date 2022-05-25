@@ -32,6 +32,7 @@ public class SceneManager {
     private Game g1;
     private Stage stage;
 
+    //arg constructor
     public SceneManager(Stage s){
         stage=s;
     }
@@ -75,6 +76,7 @@ public class SceneManager {
         Label settingsTitle=new Label("Settings");
         settingsTitle.setStyle("-fx-font-size: 20pt ; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
 
+        //settings for the canvas
         VBox vb2=new VBox(5);
         vb2.setMaxWidth(canWidth/2);
         TextField tf1=new TextField();
@@ -88,6 +90,7 @@ public class SceneManager {
         tf3.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb2.getChildren().addAll(tf1,tf2,tf3);
 
+        //settings for the ball
         VBox vb3=new VBox(5);
         vb3.setMaxWidth(canWidth/2);
         TextField tf4=new TextField();
@@ -104,6 +107,7 @@ public class SceneManager {
         tf7.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb3.getChildren().addAll(tf4,tf5,tf6,tf7);
 
+        //settings for Ping(the player being controlled using mouse)
         VBox vb4=new VBox(5);
         vb4.setMaxWidth(canWidth/2);
         TextField tf8=new TextField();
@@ -117,6 +121,7 @@ public class SceneManager {
         tf10.setStyle("-fx-background-color: #84e8d0; -fx-text-fill: #ffffff; -fx-font-size: 10pt;");
         vb4.getChildren().addAll(tf8,tf9,tf10);
 
+        //settings for Pong, the player being controlled by a bot
         VBox vb5=new VBox(5);
         vb5.setMaxWidth(canWidth/2);
         TextField tf11=new TextField();
@@ -192,12 +197,12 @@ public class SceneManager {
         stage.setScene(new Scene(vb1));
     }
 
-    //sets the attributes of the elements in Ping and Pong (the game title)
+    //sets the attributes of the elements in Ping and Pong(game title)
     public void gameAppearance(){
-        if(canWidth<=100){
+        if(canWidth<=200){
             canWidth=800;
         }
-        if(canHeight<=100){
+        if(canHeight<=200){
             canHeight=500;
         }
 
@@ -208,20 +213,26 @@ public class SceneManager {
             p1=new Player(0,p1Width,p1Height,p1Color);
         }
         if(p2Width<=0||p2Height<=0){
-            p2=new Player(775,25,100, Color.BLACK);
+            p2Width=25;
+            p2=new Player(canWidth-p2Width,25,100, Color.BLACK);
         }
         else{
             p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
         }
+        double posX=canWidth/2;
+        double posY=canHeight/2;
         if(radius<=0){
             c1=new Circle();
+            c1.setPosX(posX);
+            c1.setPosY(posY);
         }
         else{
-            c1=new Circle(400,250,radius,ballColor,speedX,speedY);
+            c1=new Circle(posX-radius,posY-radius,radius,ballColor,speedX,speedY);
         }
 
         s1=new Score(Color.rgb(247, 205, 218));
         s2=new Score(Color.rgb(247, 205, 218));
+
         SceneManager sm1=new SceneManager(stage);
         g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1,sm1);
     }

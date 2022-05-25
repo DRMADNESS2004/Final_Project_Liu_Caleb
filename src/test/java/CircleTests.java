@@ -54,7 +54,7 @@ public class CircleTests {
     }
 
     @Test
-    public void speedModificaitions(){
+    public void speedModifications(){
         Circle c1=new Circle();
 
         c1.setSpeedX(-1);
