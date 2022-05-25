@@ -213,19 +213,19 @@ public class HelloApplication extends Application {
             canHeight=500;
         }
 
-        if(p1Width==0||p1Height==0){
+        if(p1Width<=0||p1Height<=0){
             p1=new Player();
         }
         else{
             p1=new Player(0,p1Width,p1Height,p1Color);
         }
-        if(p2Width==0||p2Height==0){
+        if(p2Width<=0||p2Height<=0){
             p2=new Player(775,25,100, Color.BLACK);
         }
         else{
             p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
         }
-        if(radius==0){
+        if(radius<=0){
             c1=new Circle();
         }
         else{
