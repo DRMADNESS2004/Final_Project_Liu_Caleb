@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class SceneManager {
     private  int canWidth;
     private  int canHeight;
-    private  Color canColor=Color.GREY;
+    private  Color canColor=Color.rgb(23, 138, 252);
     private  double radius;
     private  Color ballColor;
     private  double speedX;
@@ -215,7 +215,7 @@ public class SceneManager {
         }
         if(p2Width<=0||p2Height<=0){
             p2Width=25;
-            p2=new Player(canWidth-p2Width,25,100, Color.BLACK);
+            p2=new Player(canWidth-p2Width,25,100, Color.rgb(151, 199, 247));
         }
         else{
             p2=new Player(canWidth-p2Width,p2Width,p2Height,p2Color);
@@ -231,8 +231,8 @@ public class SceneManager {
             c1=new Circle(posX-radius,posY-radius,radius,ballColor,speedX,speedY);
         }
 
-        s1=new Score(Color.rgb(247, 205, 218));
-        s2=new Score(Color.rgb(247, 205, 218));
+        s1=new Score(Color.rgb(135, 217, 237));
+        s2=new Score(Color.rgb(135, 217, 237));
 
         SceneManager sm1=new SceneManager(stage);
         g1=new Game(canWidth,canHeight,canColor,p1,p2,s1,s2,c1,sm1);

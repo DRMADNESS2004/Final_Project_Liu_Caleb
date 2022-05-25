@@ -10,7 +10,7 @@ public class Player extends Rectangle{
 
     //no-arg constructor
     public Player(){
-        super(25,100,Color.BLACK);
+        super(25,100,Color.rgb(151, 199, 247));
     }
 
     //arg constructor

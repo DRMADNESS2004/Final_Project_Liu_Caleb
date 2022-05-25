@@ -16,7 +16,7 @@ public class Circle {
     //no-arg constructor
     public Circle(){
         radius=25;
-        color=Color.BLACK;
+        color=Color.rgb(151, 199, 247);
         speedX=1;
         speedY=1;
         initialSpeedX=1;
