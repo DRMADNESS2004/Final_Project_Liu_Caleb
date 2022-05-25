@@ -9,6 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
+//class that contains the elements necessary for a regular pong game
 public class Game {
     private Circle ball;
     private Player player1;
@@ -73,18 +74,10 @@ public class Game {
         }
         if(gameStarted){
             ball.movement();
-            player1.movement(canvas);
+            player1.movementMouse(canvas);
 
             //bot movements
-            if(ball.getPosX()<width-width/6){
-                player2.setPosY(ball.getPosY()-player2.getHeight()/2);
-            }
-            else if(ball.getPosY()>player2.getPosY()+player2.getHeight()/2){
-                player2.setPosY(player2.getPosY()+1);
-            }
-            else{
-                player2.setPosY(player2.getPosY()-1);
-            }
+            player2.movementBot(ball,width);
 
             //draw ball
             gc.fillOval(ball.getPosX(), ball.getPosY(), ball.getRadius(), ball.getRadius());
@@ -102,7 +95,6 @@ public class Game {
                 ball.randomSpeed();
             }
             else{
-                //if either one of the score is equal to 5, resets scores
                 gc.setStroke(Color.WHITE);
                 gc.setTextAlign(TextAlignment.CENTER);
                 //outputs winner
@@ -110,6 +102,7 @@ public class Game {
                 gc.strokeText("Back to menu",width/2, height/2+100);
                 ball.setPosX(width/2);
                 ball.setPosY(height/2);
+                //goes back to menu screen when clicked
                 canvas.setOnMouseClicked(e->sceneManager.menu());
             }
         }
