@@ -138,7 +138,7 @@ public class SceneManager {
 
         Button goBack=new Button("Return");
         goBack.setOnAction(e->{
-            //check if the values entered were not correct or empty
+            //check if the values entered matches the regex, if not, default values are provided
             if(tf1.getText().matches("^[^019(A-Za-z)][0-9]{2,3}|1[01][0-9]{2}$")&&
                     tf2.getText().matches("^[^016789(A-Za-z)][0-9]{2}$|^6[0123][0-9]$")&&
                     tf3.getText().matches("^[(0-9)(abcdef)]{6}$")){
