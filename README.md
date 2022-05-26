@@ -9,7 +9,7 @@ in the settings menu. Over time, the speed of the ball will increase which will 
 To build the game, I had to resort to classes such as Canvas, GraphicsContext, Timeline to handle the
 animations of the objects as well as drawing them unto the canvas. I also had to use a mouse click event to reset 
 the position of the ball after a point or to go back to the menu page after a player reached 5 pts. I also used
-buttons, textfields, labels.
+buttons, textfields, labels, etc.
 
 One of the challenges I faced along the way was that I didn't really know how to make the animation classes work since
 I had never learned it in class. I got stuck a lot early on since I hadn't included certain methods of these
