@@ -22,7 +22,7 @@ public class PlayerTests {
     public void GettersNoArgConstructor(){
         Player p1=new Player();
 
-        assertEquals(Color.BLACK,p1.getColor());
+        assertEquals(Color.rgb(151, 199, 247),p1.getColor());
         assertEquals(100,p1.getHeight());
         assertEquals(25,p1.getWidth());
     }

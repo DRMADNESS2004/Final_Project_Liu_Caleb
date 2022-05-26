@@ -139,54 +139,59 @@ public class SceneManager {
         Button goBack=new Button("Return");
         goBack.setOnAction(e->{
             //check if the values entered were not correct or empty
-            try{
+            if(tf1.getText().matches("^[^019(A-Za-z)][0-9]{2,3}|1[01][0-9]{2}$")&&
+                    tf2.getText().matches("^[^016789(A-Za-z)][0-9]{2}$|^6[0123][0-9]$")&&
+                    tf3.getText().matches("^[(0-9)(abcdef)]{6}$")){
                 canWidth=Integer.parseInt(tf1.getText());
                 canHeight=Integer.parseInt(tf2.getText());
                 canColor= Color.valueOf(tf3.getText());
             }
-            catch(Exception a){
-                //a.printStackTrace();
-                canWidth=0;
-                canHeight=0;
-                canColor=Color.rgb(23, 138, 252);
+            else {
+                canWidth = 0;
+                canHeight = 0;
+                canColor = Color.rgb(23, 138, 252);
             }
 
-            try{
+            if(tf4.getText().matches("^[0-9]{1,2}\\.[0-9]+$|^[0-9]{1,2}$")&&
+                    tf5.getText().matches("^[(0-9)(abcdef)]{6}$")&&
+                    tf6.getText().matches("^[0-9]\\.[0-9]+$|^[0-9]$")&&
+                    tf7.getText().matches("^[0-9]\\.[0-9]+$|^[0-9]$")){
                 radius= Double.parseDouble(tf4.getText());
                 ballColor=Color.valueOf(tf5.getText());
                 speedX=Double.parseDouble(tf6.getText());
                 speedY=Double.parseDouble(tf7.getText());
             }
-            catch(Exception a){
-                //a.printStackTrace();
+            else{
                 radius=0;
-                ballColor=Color.BLACK;
+                ballColor=Color.rgb(151, 199, 247);
                 speedX=1;
                 speedY=1;
             }
 
-            try{
+            if(tf8.getText().matches("^[0-9]+$")&&
+                    tf9.getText().matches("^[0-9]+$")&&
+                    tf10.getText().matches("^[(0-9)(abcdef)]{6}$")){
                 p1Width=Integer.parseInt(tf8.getText());
                 p1Height=Integer.parseInt(tf9.getText());
                 p1Color=Color.valueOf(tf10.getText());
             }
-            catch(Exception a){
-                //a.printStackTrace();
+            else{
                 p1Width=0;
                 p1Height=0;
-                p1Color=Color.BLACK;
+                p1Color=Color.rgb(151, 199, 247);
             }
 
-            try{
+            if(tf11.getText().matches("^[0-9]+$")&&
+                    tf12.getText().matches("^[0-9]+$")&&
+                    tf13.getText().matches("^[(0-9)(abcdef)]{6}$")){
                 p2Width=Integer.parseInt(tf11.getText());
                 p2Height=Integer.parseInt(tf12.getText());
                 p2Color=Color.valueOf(tf13.getText());
             }
-            catch(Exception a){
-                //a.printStackTrace();
+            else{
                 p2Width=0;
                 p2Height=0;
-                p2Color=Color.BLACK;
+                p2Color=Color.rgb(151, 199, 247);
             }
 
             menu();
@@ -200,20 +205,20 @@ public class SceneManager {
 
     //sets the attributes of the elements in Ping and Pong(game title)
     public void gameAppearance(){
-        if(canWidth<=200){
+        if(canWidth<200){
             canWidth=800;
         }
-        if(canHeight<=200){
+        if(canHeight<200){
             canHeight=500;
         }
 
-        if(p1Width<=0||p1Height<=0){
+        if(p1Width<=0||p1Height<=0||p1Width>=3*canWidth/4||p1Height>=3*canHeight/4){
             p1=new Player();
         }
         else{
             p1=new Player(0,p1Width,p1Height,p1Color);
         }
-        if(p2Width<=0||p2Height<=0){
+        if(p2Width<=0||p2Height<=0||p2Width>=3*canWidth/4||p2Height>=3*canHeight/4){
             p2Width=25;
             p2=new Player(canWidth-p2Width,25,100, Color.rgb(151, 199, 247));
         }

@@ -24,10 +24,8 @@ public class CircleTests {
     public void GettersNoArgConstructor(){
         Circle c1=new Circle();
 
-        assertEquals(400,c1.getPosX());
-        assertEquals(250,c1.getPosY());
         assertEquals(25,c1.getRadius());
-        assertEquals(Color.BLACK,c1.getColor());
+        assertEquals(Color.rgb(151, 199, 247),c1.getColor());
         assertEquals(1,c1.getSpeedX());
         assertEquals(1,c1.getSpeedY());
     }
@@ -52,6 +50,8 @@ public class CircleTests {
     //tests the modifications of the attributes posX and posY when the method movement() is called
     public void positionModifications(){
         Circle c1=new Circle();
+        c1.setPosX(400);
+        c1.setPosY(250);
         c1.movement();
 
         assertEquals(401,c1.getPosX());

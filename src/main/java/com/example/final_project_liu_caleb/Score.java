@@ -9,7 +9,7 @@ public class Score implements ICountable{
 
     //no-arg constructor
     public Score(){
-        color=Color.BLACK;
+        color=Color.AQUA;
     }
 
     //arg constructor
